@@ -15,17 +15,22 @@ public class ChasisOmni implements Mechanism{
     
     public void initializeHardware(HardwareMap hardwareMap){
         frontLeft = hardwareMap.get(DcMotor.class, "motor 1");
-        frontRight = hardwareMap.get(DcMotor.class, "");
-        backLeft = hardwareMap.get(DcMotor.class, "");
-        backRight = hardwareMap.get(DcMotor.class, "");
+        frontRight = hardwareMap.get(DcMotor.class, "motor 2");
+        backLeft = hardwareMap.get(DcMotor.class, "motor 3");
+        backRight = hardwareMap.get(DcMotor.class, "motor 4");
     }
     
     public void move(double drive, double lateral, double turn){
         // TODO: Add variables for the other motors using the correct arithmetic
         double frontLeftPower = drive + lateral + turn;
+        double frontRightPower = drive + lateral + turn;
+        double backLeftPower = drive + lateral + turn;
+        double backRightPower = drive + lateral + turn;
         // TODO: Assign the corresponding power to each motor
         frontLeft.setPower(frontLeftPower);
+        frontRight.setPower(frontRightPower);
+        backLeft.setPower(backLeftPower);
+        backRight.setPower(backRightPower);
     }
-    
-    
+}
 }
