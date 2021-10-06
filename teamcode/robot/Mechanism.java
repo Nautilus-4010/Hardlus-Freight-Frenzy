@@ -1,14 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robot;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
+public interface Mechanism {
 
-public class Mechanism {
-
-    // todo: write your code here
-    public Elevator() {
-        elevator = hardwareMap.get(DcMotor.class, "motor 5");
-        //double elevatorPower = turn;
-        //elevator.setPower(elevatorPower);
-    }
+    public void initializeHardware(HardwareMap hardwareMap);
 }
