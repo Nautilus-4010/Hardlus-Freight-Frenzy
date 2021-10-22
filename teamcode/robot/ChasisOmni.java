@@ -20,7 +20,8 @@ public class ChasisOmni implements Mechanism{
         backRight = hardwareMap.get(DcMotor.class, "motor 4");
     }
     
-    public void move(double drive, double lateral, double turn){
+    public void move(double drive, double lateral, double turn, double multiplier){
+        // TODO: Include multiplier somewhere to increase or decrease the speed of the robot
         double frontLeftPower = drive + lateral + turn;
         double frontRightPower = drive - lateral - turn;
         double backLeftPower = drive - lateral + turn;

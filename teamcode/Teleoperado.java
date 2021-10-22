@@ -31,11 +31,24 @@ public class Teleoperado extends OpMode{
         double drive = -gamepad1.left_stick_y;
         double lateral = gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
-        robot.chasis.move(drive, lateral, turn);
+        double powerMultiplier = getPowerMultiplier();
+
+        robot.chasis.move(drive, lateral, turn, powerMultiplier);
         telemetry.addData("FPS", fps.getUpdatedFPS());
         telemetry.update();
     }
     
     @Override
     public void stop(){}
+
+    private double getPowerMultiplier(){
+        if(gamepad1.right_bumper && gamepad1.left_bumper)
+            return 0.4;
+        if(gamepad1.right_bumper)
+            return 0.8;
+        if(gamepad1.left_bumper)
+            return 0.6;
+        else
+            return 1;
+    }
 }
