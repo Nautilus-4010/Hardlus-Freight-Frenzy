@@ -28,8 +28,8 @@ public class Teleoperado extends OpMode{
     
     @Override
     public void loop(){
-        double drive = -gamepad1.left_stick_x;
-        double lateral = gamepad1.left_stick_y;
+        double drive = -gamepad1.left_stick_y;
+        double lateral = gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
         robot.chasis.move(drive, lateral, turn);
         telemetry.addData("FPS", fps.getUpdatedFPS());
