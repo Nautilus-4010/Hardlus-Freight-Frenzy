@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
@@ -18,6 +19,8 @@ public class ChasisOmni implements Mechanism{
         frontRight = hardwareMap.get(DcMotor.class, "Motor_frontal_derecho");
         backLeft = hardwareMap.get(DcMotor.class, "Motor_trasero_izquierdo");
         backRight = hardwareMap.get(DcMotor.class, "Motor_trasero_derecho");
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
     }
     
     public void move(double drive, double lateral, double turn, double multiplier){
