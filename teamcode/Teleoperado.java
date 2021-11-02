@@ -35,6 +35,7 @@ public class Teleoperado extends OpMode{
 
         robot.chasis.move(drive, lateral, turn, powerMultiplier);
         telemetry.addData("FPS", fps.getUpdatedFPS());
+        robot.logMechanismStatus();
         telemetry.update();
     }
     
