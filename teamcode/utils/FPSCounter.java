@@ -27,7 +27,7 @@ public class FPSCounter {
 
     private void updateFPS(){
         double currentTime = runtime.seconds();
-        double secondsSinceLastUpdate = lastFPSUpdate - currentTime;
+        double secondsSinceLastUpdate = currentTime - lastFPSUpdate;
         if(secondsSinceLastUpdate > 1){
             fps = ciclos;
             ciclos = 0;
