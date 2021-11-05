@@ -36,12 +36,6 @@ public class FTCRobot {
             programa.telemetry.addData("Identified target", identifiedTarget.name);
             programa.telemetry.addData("Pos (mm)", "{X, Y, Z} = %.1f, %.1f, %.1f", identifiedTarget.x, identifiedTarget.y, identifiedTarget.z);
         }
-        List<Recognition> identifiedObjects = vision.getRecognizedObjects();
-        if(identifiedObjects != null){
-            programa.telemetry.addData("Found objects", identifiedObjects.size());
-            for(Recognition object: identifiedObjects)
-                programa.telemetry.addData("Objeto", object.getLabel());
-        }
         String[] chasisPowers = chasis.getChasisPowers();
         programa.telemetry.addData("Chasis", chasisPowers[0] + " | " + chasisPowers[1]);
         programa.telemetry.addData("Chasis", chasisPowers[2] + " | " + chasisPowers[3]);
