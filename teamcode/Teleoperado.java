@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robot.FTCRobot;
 import org.firstinspires.ftc.teamcode.utils.FPSCounter;
 
-@TeleOp(name="Teleoperado")
+@TeleOp(name="Hardlus Freight Frenzy")
 public class Teleoperado extends OpMode{
     private FTCRobot robot;
     private FPSCounter fps;
@@ -35,6 +35,7 @@ public class Teleoperado extends OpMode{
 
         robot.chasis.move(drive, lateral, turn, powerMultiplier);
         telemetry.addData("FPS", fps.getUpdatedFPS());
+        robot.logMechanismStatus();
         telemetry.update();
     }
     
