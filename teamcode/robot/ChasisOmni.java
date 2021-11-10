@@ -33,4 +33,12 @@ public class ChasisOmni implements Mechanism{
         backLeft.setPower(Range.clip(backLeftPower, -1, 1));
         backRight.setPower(Range.clip(backRightPower, -1, 1));
     }
+
+    public String[] getChasisPowers(){
+        String[] powers = {
+            "FL: " + String.valueOf(frontLeft.getPower()), "FR: " + String.valueOf(frontRight.getPower()), 
+            "BL: " + String.valueOf(backLeft.getPower()), "BR: " + String.valueOf(backRight.getPower())
+        };
+        return powers;
+    }
 }
