@@ -35,10 +35,9 @@ public class ChasisOmni implements Mechanism{
     }
 
     public String[] getChasisPowers(){
-        //TODO: Implement method
         String[] powers = {
-            "FL: 0.75", "FR: 0.75", 
-            "BL: 0.75", "BR: 0.75"
+            "FL: " + String.valueOf(frontLeft.getPower()), "FR: " + String.valueOf(frontRight.getPower()), 
+            "BL: " + String.valueOf(backLeft.getPower()), "BR: " + String.valueOf(backRight.getPower())
         };
         return powers;
     }
