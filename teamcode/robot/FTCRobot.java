@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.utils.TargetInfo;
 
 
 public class FTCRobot {
@@ -22,7 +23,7 @@ public class FTCRobot {
     public void initializeMechanisms(){
         HardwareMap hwMap = programa.hardwareMap;
         chasis.initializeHardware(hwMap);
-        elevator.initializeHardware(hwMap);
+        //elevator.initializeHardware(hwMap);
         vision.initializeHardware(hwMap);
         programa.telemetry.addData("Status", "Ready to rumbleee!!!");
     }
