@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robot.FTCRobot;
 import org.firstinspires.ftc.teamcode.utils.FPSCounter;
 
-@TeleOp(name="Hardlus Freight Frenzy")
+@TeleOp(name="Teleoperado Hardlus Freight Frenzy")
 public class Teleoperado extends OpMode{
     private FTCRobot robot;
     private FPSCounter fps;

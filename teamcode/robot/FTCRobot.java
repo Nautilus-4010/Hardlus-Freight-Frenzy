@@ -29,8 +29,10 @@ public class FTCRobot {
     public void initializeMechanisms(){
         HardwareMap hwMap = programa.hardwareMap;
         chasis.initializeHardware(hwMap);
-        //elevator.initializeHardware(hwMap);
+        elevator.initializeHardware(hwMap);
         vision.initializeHardware(hwMap);
+        intake.initializeHardware(hwMap);
+        carousel.initializeHardware(hwMap);
         programa.telemetry.addData("Status", "Ready to rumbleee!!!");
     }
 

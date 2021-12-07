@@ -12,7 +12,7 @@ public class InTake implements Mechanism{
     public InTake(){}
 
     public void initializeHardware(HardwareMap hardwareMap){
-        motorIntake = hardwareMap.get(DcMotor.class, "intake");
+        motorIntake = hardwareMap.get(DcMotor.class, "intakeMotor");
         motorIntake.setDirection(DcMotorSimple.Direction.REVERSE);
         
     }

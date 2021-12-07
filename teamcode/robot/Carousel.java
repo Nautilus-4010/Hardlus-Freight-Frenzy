@@ -11,10 +11,10 @@ public class Carousel implements Mechanism{
     }
     public void setServoPosition(Gamepad gamepad) {
         double carouselPower = 0;
-        if (gamepad.left_stick_x < -0.01) {
+        if (gamepad.right_stick_y < -0.01) {
             carouselPower = -1;
         }
-        else if (gamepad.left_stick_x > 0.01) {
+        else if (gamepad.right_stick_y > 0.01) {
             carouselPower = 1;
         }
         else {

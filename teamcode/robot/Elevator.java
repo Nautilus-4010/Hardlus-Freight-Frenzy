@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Elevator implements Mechanism {
     private DcMotor motorElevator;
-    //private Servo servo;
-    private CRServo crServo;
+    private Servo servoElevator;
+    //private CRServo crServo;
     //private LynxI2cColorRangeSensor distanceSensor;
     public Elevator() {}
     
@@ -26,7 +26,8 @@ public class Elevator implements Mechanism {
         //servo = hardwareMap.get(Servo.class, "elevatorServomotor");
         //distanceSensor = hardwareMap.get(LynxI2cColorRangeSensor.class, "sensor_distancia");
         
-        crServo = hardwareMap.get(CRServo.class, "elevatorServomotor");
+        //crServo = hardwareMap.get(CRServo.class, "elevatorServomotor");
+        servoElevator = hardwareMap.get(Servo.class, "elevatorServomotor");
     }
     
     /**
@@ -59,7 +60,16 @@ public class Elevator implements Mechanism {
     }
     
     public void setServoPosition(Gamepad gamepad) {
-      crServo.setPower(-gamepad.left_stick_y);
-      crServo.setPower(gamepad.left_stick_y);
+        double servoElevatorPosition = 0.5;
+        if (gamepad.x) {
+            servoElevatorPosition = 1.0;
+        }
+        else if (gamepad.y) {
+            servoElevatorPosition = 0.0;
+        }
+        else {
+            servoElevatorPosition = 0.5;
+        }
+        servoElevator.setPosition(servoElevatorPosition);
     }
 }
