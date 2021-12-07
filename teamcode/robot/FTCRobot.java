@@ -14,12 +14,16 @@ public class FTCRobot {
     public ChasisOmni chasis;
     public Elevator elevator;
     public RobotVision vision;
+    public InTake intake;
+    public Carousel carousel;
     
     public FTCRobot(OpMode programa){
         this.programa = programa;
         this.chasis = new ChasisOmni();
         this.elevator = new Elevator();
         this.vision = new RobotVision();
+        this.intake = new InTake();
+        this.carousel = new Carousel();
     }
     
     public void initializeMechanisms(){

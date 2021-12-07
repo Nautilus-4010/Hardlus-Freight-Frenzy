@@ -1,26 +1,40 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class ChasisOmni implements Mechanism{
+public class ChasisOmni implements Mechanism, Sensor{
+    private final double LIMIT = 10;
 
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor backLeft;
     private DcMotor backRight;
     
+    private RevColorSensorV3 distanceSensor;
+    
     public ChasisOmni(){}
     
+    public RevColorSensorV3 getSensor(){
+        return this.distanceSensor;
+    }
+    public boolean getValue(){
+        return distanceSensor.getDistance(DistanceUnit.CM) < LIMIT;
+    }
+    
     public void initializeHardware(HardwareMap hardwareMap){
-        frontLeft = hardwareMap.get(DcMotor.class, "Motor_frontal_izquierdo");
-        frontRight = hardwareMap.get(DcMotor.class, "Motor_frontal_derecho");
-        backLeft = hardwareMap.get(DcMotor.class, "Motor_trasero_izquierdo");
-        backRight = hardwareMap.get(DcMotor.class, "Motor_trasero_derecho");
+        frontLeft = hardwareMap.get(DcMotor.class, "front_left");
+        frontRight = hardwareMap.get(DcMotor.class, "front_right");
+        backLeft = hardwareMap.get(DcMotor.class, "back_left");
+        backRight = hardwareMap.get(DcMotor.class, "back_right");
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
+        
+        distanceSensor = hardwareMap.get(RevColorSensorV3.class, "distance_sensor");
     }
     
     public void move(double drive, double lateral, double turn, double multiplier){
@@ -28,10 +42,10 @@ public class ChasisOmni implements Mechanism{
         double frontRightPower = (drive - lateral - turn) * multiplier;
         double backLeftPower = (drive - lateral + turn) * multiplier;
         double backRightPower = (drive + lateral - turn) * multiplier;
-        frontLeft.setPower(Range.clip(frontLeftPower, -1, 1));
-        frontRight.setPower(Range.clip(frontRightPower, -1, 1));
-        backLeft.setPower(Range.clip(backLeftPower, -1, 1));
-        backRight.setPower(Range.clip(backRightPower, -1, 1));
+        frontLeft.setPower(Range.clip(frontLeftPower, -0.8, 0.8));
+        frontRight.setPower(Range.clip(frontRightPower, -0.8, 0.8));
+        backLeft.setPower(Range.clip(backLeftPower, -0.8, 0.8));
+        backRight.setPower(Range.clip(backRightPower, -0.8, 0.8));
     }
 
     public String[] getChasisPowers(){

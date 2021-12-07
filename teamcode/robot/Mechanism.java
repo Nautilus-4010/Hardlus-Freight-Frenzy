@@ -4,5 +4,5 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public interface Mechanism {
 
-    public void initializeHardware(HardwareMap hardwareMap);
+    void initializeHardware(HardwareMap hardwareMap);
 }
