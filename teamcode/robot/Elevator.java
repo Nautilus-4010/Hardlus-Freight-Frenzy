@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -21,7 +20,7 @@ public class Elevator implements Mechanism {
     
     public void initializeHardware(HardwareMap hardwareMap){
         motorElevator = hardwareMap.get(DcMotor.class, "elevatorMotor");
-        motorElevator.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorElevator.setDirection(DcMotorSimple.Direction.FORWARD);
         
         //servo = hardwareMap.get(Servo.class, "elevatorServomotor");
         //distanceSensor = hardwareMap.get(LynxI2cColorRangeSensor.class, "sensor_distancia");

@@ -9,7 +9,7 @@ public class Carousel implements Mechanism{
     public void initializeHardware(HardwareMap hardwareMap) {
         carouselServomotor = hardwareMap.get(CRServo.class, "servoCarrusel");
     }
-    public void setServoPosition(Gamepad gamepad) {
+    public void setServoPower(Gamepad gamepad) {
         double carouselPower = 0;
         if (gamepad.right_stick_y < -0.01) {
             carouselPower = -1;

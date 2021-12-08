@@ -39,7 +39,7 @@ public class Teleoperado extends OpMode{
         robot.intake.setPower(gamepad2);
         robot.elevator.setPower(gamepad2);
         robot.elevator.setServoPosition(gamepad2);
-        robot.carousel.setServoPosition(gamepad2);
+        robot.carousel.setServoPower(gamepad2);
         telemetry.addData("FPS", fps.getUpdatedFPS());
         robot.logMechanismStatus();
         telemetry.addData("Distancia: ", robot.chasis.getSensor().getDistance(DistanceUnit.CM));
