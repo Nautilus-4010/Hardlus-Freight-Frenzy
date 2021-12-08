@@ -59,15 +59,15 @@ public class Elevator implements Mechanism {
     }
     
     public void setServoPosition(Gamepad gamepad) {
-        double servoElevatorPosition = 0.5;
+        double servoElevatorPosition = 90;
         if (gamepad.x) {
-            servoElevatorPosition = 1.0;
+            servoElevatorPosition = 180;
         }
         else if (gamepad.y) {
-            servoElevatorPosition = 0.0;
+            servoElevatorPosition = 0;
         }
         else {
-            servoElevatorPosition = 0.5;
+            servoElevatorPosition = 90;
         }
         servoElevator.setPosition(servoElevatorPosition);
     }

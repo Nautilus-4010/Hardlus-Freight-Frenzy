@@ -51,5 +51,10 @@ public class FTCRobot {
         String[] chasisPowers = chasis.getChasisPowers();
         programa.telemetry.addData("Chasis", chasisPowers[0] + " | " + chasisPowers[1]);
         programa.telemetry.addData("Chasis", chasisPowers[2] + " | " + chasisPowers[3]);
+        programa.telemetry.addData("Angulo: ", chasis.getAngle());
+        programa.telemetry.addData("FL: ", chasis.frontLeft.getCurrentPosition());
+        programa.telemetry.addData("FR: ", chasis.frontRight.getCurrentPosition());
+        programa.telemetry.addData("BL: ", chasis.backLeft.getCurrentPosition());
+        programa.telemetry.addData("BR: ", chasis.backRight.getCurrentPosition());
     }
 }
