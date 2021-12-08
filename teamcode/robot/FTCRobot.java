@@ -19,7 +19,7 @@ public class FTCRobot {
     
     public FTCRobot(OpMode programa){
         this.programa = programa;
-        this.chasis = new ChasisOmni();
+        this.chasis = new ChasisOmni(programa);
         this.elevator = new Elevator();
         this.vision = new RobotVision();
         this.intake = new InTake();
