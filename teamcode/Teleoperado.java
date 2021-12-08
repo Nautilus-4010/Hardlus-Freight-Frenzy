@@ -51,12 +51,12 @@ public class Teleoperado extends OpMode{
 
     private double getPowerMultiplier(){
         if(gamepad1.right_bumper && gamepad1.left_bumper)
-            return 0.25;
+            return 0.3;
         if(gamepad1.right_bumper)
-            return 0.75;
+            return 0.6;
         if(gamepad1.left_bumper)
-            return 0.5;
+            return 0.4;
         else
-            return 1;
+            return 0.8;
     }
 }

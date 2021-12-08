@@ -42,10 +42,10 @@ public class ChasisOmni implements Mechanism, Sensor{
         double frontRightPower = (drive - lateral - turn) * multiplier;
         double backLeftPower = (drive - lateral + turn) * multiplier;
         double backRightPower = (drive + lateral - turn) * multiplier;
-        frontLeft.setPower(Range.clip(frontLeftPower, -0.8, 0.8));
-        frontRight.setPower(Range.clip(frontRightPower, -0.8, 0.8));
-        backLeft.setPower(Range.clip(backLeftPower, -0.8, 0.8));
-        backRight.setPower(Range.clip(backRightPower, -0.8, 0.8));
+        frontLeft.setPower(Range.clip(frontLeftPower, -1, 1));
+        frontRight.setPower(Range.clip(frontRightPower, -1, 1));
+        backLeft.setPower(Range.clip(backLeftPower, -1, 1));
+        backRight.setPower(Range.clip(backRightPower, -1, 1));
     }
 
     public String[] getChasisPowers(){
