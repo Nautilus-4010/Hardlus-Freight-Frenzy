@@ -24,9 +24,8 @@ public class ChasisOmni implements Mechanism, Sensor{
     private Orientation angles;
     private Acceleration gravity;
     private final double LIMIT = 10;
-    // TODO: corregir numerito
-    public static final int TICKS_PER_CM = 538;
-    public static final double AUTONOMOUS_SPEED = 0.6;
+    public static final int TICKS_PER_CM = 25;
+    public static final double AUTONOMOUS_SPEED = 0.2;
 
     public DcMotor frontLeft;
     public DcMotor frontRight;
@@ -96,12 +95,13 @@ public class ChasisOmni implements Mechanism, Sensor{
         backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         double currentAngle = getAngle();
-        double targetAngle = angleToRotate + getAngle();
-        while (currentAngle < targetAngle) {
+        double targetAngle = currentAngle - angleToRotate;
+        while (currentAngle > targetAngle) {
             frontLeft.setPower(AUTONOMOUS_SPEED);
             frontRight.setPower(-AUTONOMOUS_SPEED);
             backLeft.setPower(AUTONOMOUS_SPEED);
             backRight.setPower(-AUTONOMOUS_SPEED);
+            currentAngle = getAngle();
         }
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -114,12 +114,18 @@ public class ChasisOmni implements Mechanism, Sensor{
         backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         double currentAngle = getAngle();
+        double startAngle = currentAngle; //borrar
         double targetAngle = angleToRotate + getAngle();
-        while (currentAngle > targetAngle) {
+        while (currentAngle < targetAngle) {
+            program.telemetry.addData("Start angle: ", startAngle);
+            program.telemetry.addData("Target angle: ", targetAngle);
+            program.telemetry.addData("Current angle: ", currentAngle);
             frontLeft.setPower(-AUTONOMOUS_SPEED);
-            frontRight.setPower(AUTONOMOUS_SPEED);
+            frontRight.setPower(AUTONOMOUS_SPEED); 
             backLeft.setPower(-AUTONOMOUS_SPEED);
-            backRight.setPower(AUTONOMOUS_SPEED);
+            backRight.setPower(AUTONOMOUS_SPEED); 
+            currentAngle = getAngle();
+            program.telemetry.update();
         }
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -150,8 +156,10 @@ public class ChasisOmni implements Mechanism, Sensor{
 
     public String[] getChasisPowers(){
         String[] powers = {
-            "FL: " + String.valueOf(frontLeft.getPower()), "FR: " + String.valueOf(frontRight.getPower()), 
-            "BL: " + String.valueOf(backLeft.getPower()), "BR: " + String.valueOf(backRight.getPower())
+            String.format("FL: %.2f", frontLeft.getPower()),
+            String.format("FR: %.2f", frontRight.getPower()),
+            String.format("BL: %.2f", backLeft.getPower()),
+            String.format("BR: %.2f", backRight.getPower())
         };
         return powers;
     }

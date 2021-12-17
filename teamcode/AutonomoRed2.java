@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.robot.FTCRobot;
 
-@Autonomous(name = "Autónomo Rojo Estacionarse", group = "Red Alliance")
+@Autonomous(name = "Autónomo Rojo Estacionarse Cuadrado", group = "Red Alliance")
 
-public class AutonomoRed extends LinearOpMode {
+public class AutonomoRed2 extends LinearOpMode {
     private FTCRobot robot;
 
     @Override
@@ -20,7 +20,8 @@ public class AutonomoRed extends LinearOpMode {
         robot.initializeMechanisms();
         telemetry.update();
         waitForStart();
-        robot.chasis.turnRight(90);
-        robot.chasis.moveForward(90);
+        robot.chasis.turnLeft(90);
+        robot.chasis.lateralMove(50);
+        robot.chasis.moveForward(62);
     }
 }

@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,11 +8,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.robot.FTCRobot;
 
-@Autonomous(name = "Autónomo Rojo Estacionarse", group = "Red Alliance")
+@Autonomous(name= "Autónomo Azul Estacionarse Cuadrado", group = "Blue Alliance")
 
-public class AutonomoRed extends LinearOpMode {
+public class AutonomoBlue2 extends LinearOpMode{
     private FTCRobot robot;
-
     @Override
     public void runOpMode() {
         robot = new FTCRobot(this);
@@ -21,6 +19,7 @@ public class AutonomoRed extends LinearOpMode {
         telemetry.update();
         waitForStart();
         robot.chasis.turnRight(90);
-        robot.chasis.moveForward(90);
+        robot.chasis.lateralMove(-50);
+        robot.chasis.moveForward(62);
     }
 }

@@ -1,20 +1,33 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+//import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
+//import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Elevator implements Mechanism {
+    private OpMode programa;
+    
     private DcMotor motorElevator;
-    private Servo servoElevator;
-    //private CRServo crServo;
-    //private LynxI2cColorRangeSensor distanceSensor;
+    private CRServo servoElevator;
+    public long NIVEL_UNO = 400L, 
+    NIVEL_DOS = 800L,
+    NIVEL_TRES = 1200L;
+    
     public Elevator() {}
+    
+    public Elevator(OpMode programa){
+        this.programa = programa;
+    }
+    
+    private final double INCREMENTO = 0.06;
     
     private final double LIMITE = 20; // En cm
     
@@ -22,11 +35,10 @@ public class Elevator implements Mechanism {
         motorElevator = hardwareMap.get(DcMotor.class, "elevatorMotor");
         motorElevator.setDirection(DcMotorSimple.Direction.FORWARD);
         
-        //servo = hardwareMap.get(Servo.class, "elevatorServomotor");
         //distanceSensor = hardwareMap.get(LynxI2cColorRangeSensor.class, "sensor_distancia");
         
         //crServo = hardwareMap.get(CRServo.class, "elevatorServomotor");
-        servoElevator = hardwareMap.get(Servo.class, "elevatorServomotor");
+        servoElevator = hardwareMap.get(CRServo.class, "elevatorServomotor");
     }
     
     /**
@@ -58,17 +70,61 @@ public class Elevator implements Mechanism {
         motorElevator.setPower(elevatorPower);
     }
     
-    public void setServoPosition(Gamepad gamepad) {
-        double servoElevatorPosition = 90;
-        if (gamepad.x) {
-            servoElevatorPosition = 180;
+    public void setServoPower(Gamepad gamepad) {
+        //double servoElevatorPosition = servoElevator.getPosition();
+        double servoElevatorPower = 0;
+        if (gamepad.left_stick_x > 0.01) {
+            //servoElevatorPosition += INCREMENTO;
+            servoElevatorPower = 1;
         }
-        else if (gamepad.y) {
-            servoElevatorPosition = 0;
+        else if (gamepad.left_stick_x < -0.01) {
+            //servoElevatorPosition -= INCREMENTO;
+            servoElevatorPower = -1;
+        }
+        else{
+           servoElevatorPower = 0; 
+        }
+        //servoElevator.setPosition(Range.clip(servoElevatorPosition, -1, 1));
+        servoElevator.setPower(servoElevatorPower);
+    }
+    public void setLevel(int nivel){
+        LinearOpMode aux = (LinearOpMode) programa;
+        double power = 0.6;
+        switch(nivel){
+            case 1:
+                motorElevator.setPower(power);
+                aux.sleep(NIVEL_UNO);
+                break;
+            case 2:
+                motorElevator.setPower(power);
+                aux.sleep(NIVEL_DOS);
+                break;
+            case 3:
+                motorElevator.setPower(power);
+                aux.sleep(NIVEL_TRES);
+                break;
+            default: 
+                aux.sleep(100L);
+                break;
+        }
+        motorElevator.setPower(0);
+    }
+   /* public double getAngle(){
+        return servoElevator.getPosition();
+    } */
+    /*
+    public void setServoPosition(Gamepad gamepad){
+        double power = 0;
+        if (gamepad.y) {
+            power = -0.8;
+        }
+        else if (gamepad.x) {
+            power = 0.8;
         }
         else {
-            servoElevatorPosition = 90;
+            power = 0;
         }
-        servoElevator.setPosition(servoElevatorPosition);
+        servoElevator.setPower(power);
     }
+    */
 }
