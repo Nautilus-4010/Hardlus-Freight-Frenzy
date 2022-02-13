@@ -7,24 +7,23 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.robot.FTCRobot;
+
 
 @Autonomous(name = "Autónomo Rojo Estacionarse", group = "Red Alliance")
-
 public class AutonomoRed extends LinearOpMode {
-    private FTCRobot robot;
+    private Hardbot robot;
 
     @Override
     public void runOpMode() {
-        robot = new FTCRobot(this);
-        robot.initializeMechanisms();
+        robot = new Hardbot(this);
+        robot.initializeHardware();
         telemetry.update();
         waitForStart();
-        robot.chasis.moveForward(5);
-        robot.chasis.turnRight(82);
-        robot.chasis.lateralMove(10);
-        robot.chasis.lateralMove(4);
-        robot.chasis.moveForward(45);
-        robot.chasis.moveForward(30);
+        robot.moveForward(5);
+        robot.turnRight(82);
+        robot.lateralMove(10);
+        robot.lateralMove(4);
+        robot.moveForward(45);
+        robot.moveForward(30);
     }
 }

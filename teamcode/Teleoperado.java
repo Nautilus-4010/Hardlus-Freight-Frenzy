@@ -6,20 +6,19 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.robot.FTCRobot;
 import org.firstinspires.ftc.teamcode.utils.FPSCounter;
 
 @TeleOp(name="Teleoperado Hardlus Freight Frenzy")
 public class Teleoperado extends OpMode{
-    private FTCRobot robot;
+    private Hardbot robot;
     private FPSCounter fps;
     private double lastChange;
     private ElapsedTime runtime;
     @Override
     public void init(){
-        robot = new FTCRobot(this);
+        robot = new Hardbot(this);
         fps = new FPSCounter();
-        robot.initializeMechanisms();
+        robot.initializeHardware();
         telemetry.update();
         runtime = new ElapsedTime();
     }
@@ -41,16 +40,15 @@ public class Teleoperado extends OpMode{
         double turn = gamepad1.left_stick_x;
         double powerMultiplier = getPowerMultiplier();
 
-        robot.chasis.move(drive, lateral, turn, powerMultiplier);
-        robot.intake.setPower(gamepad2);
-        robot.elevator.setPower(gamepad2);
+        robot.move(drive, lateral, turn, powerMultiplier);
+        controlIntake();
+        controlElevator();
         if (lastChange + 30 < runtime.milliseconds()){
-            robot.elevator.setServoPower(gamepad2);
+            controlElevatorServo();
             lastChange = runtime.milliseconds();
         }
-        robot.carousel.setServoPower(gamepad2);
+        controlCarousel();
         telemetry.addData("FPS", fps.getUpdatedFPS());
-        robot.logMechanismStatus();
         telemetry.update();
     }
     
@@ -66,5 +64,53 @@ public class Teleoperado extends OpMode{
             return 0.4;
         else
             return 0.8;
+    }
+    
+    private void controlCarousel(){
+        double carouselPower = 0;
+        if (gamepad2.right_stick_y < 0) {
+            carouselPower = -1;
+        }
+        else if (gamepad2.right_stick_y > 0) {
+            carouselPower = 1;
+        }
+        else {
+            carouselPower = 0;
+        }
+        robot.carouselServomotor.setPower(carouselPower);
+    }
+    
+    private void controlElevator(){
+        double elevatorPower = 0;
+        if(gamepad2.right_trigger > 0.00001){
+            elevatorPower = Hardbot.ELEVATOR_POWER;
+        } else if (gamepad2.left_trigger > 0.00001){
+            elevatorPower = -Hardbot.ELEVATOR_POWER;
+        } else {
+            elevatorPower = 0.0;
+        }
+        robot.motorElevator.setPower(elevatorPower);
+    }
+    
+    private void controlElevatorServo(){
+        double servoElevatorPower = 0;
+        if (gamepad2.left_stick_x > 0) {
+            servoElevatorPower = 1;
+        } else if (gamepad2.left_stick_x < 0) {
+            servoElevatorPower = -1;
+        }
+        else{
+           servoElevatorPower = 0; 
+        }
+    }
+    
+    private void controlIntake(){
+        double intakePower = 0;
+        if(gamepad2.a){
+            intakePower = -Hardbot.INTAKE_POWER;
+        } else if (gamepad2.b){
+            intakePower = Hardbot.INTAKE_POWER;
+        }
+        robot.motorIntake.setPower(intakePower);
     }
 }
