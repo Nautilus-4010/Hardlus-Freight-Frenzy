@@ -22,4 +22,16 @@ public class Carousel implements Mechanism{
         }
         carouselServomotor.setPower(carouselPower);
     }
+    public void carouselMove(double lap) {
+        double carouselPower = 0;
+        if (lap >= 1) {
+            carouselPower = lap;
+        }
+        else if (lap <= -1) {
+            carouselPower = lap;
+        } else {
+            carouselPower = 0;
+        }
+        carouselServomotor.setPower(carouselPower);
+    }
 }

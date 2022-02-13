@@ -20,7 +20,11 @@ public class AutonomoRed extends LinearOpMode {
         robot.initializeMechanisms();
         telemetry.update();
         waitForStart();
-        robot.chasis.turnRight(90);
-        robot.chasis.moveForward(90);
+        robot.chasis.moveForward(5);
+        robot.chasis.turnRight(82);
+        robot.chasis.lateralMove(10);
+        robot.chasis.lateralMove(4);
+        robot.chasis.moveForward(45);
+        robot.chasis.moveForward(30);
     }
 }

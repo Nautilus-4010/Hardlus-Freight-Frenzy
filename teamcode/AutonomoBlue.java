@@ -18,10 +18,11 @@ public class AutonomoBlue extends LinearOpMode{
         robot.initializeMechanisms();
         telemetry.update();
         waitForStart();
-        robot.chasis.turnLeft(90);
-        robot.chasis.lateralMove(-5);
-        robot.chasis.moveForward(50);
-        robot.chasis.turnRight(-3);
-        robot.chasis.moveForward(40);
+        robot.chasis.moveForward(5);
+        robot.chasis.turnRight(82);
+        robot.chasis.lateralMove(-10);
+        robot.chasis.lateralMove(-4);
+        robot.chasis.moveForward(45);
+        robot.chasis.moveForward(30);
     }
 }
