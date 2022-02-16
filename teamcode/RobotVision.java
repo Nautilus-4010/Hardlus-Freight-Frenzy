@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.robot;
+package org.firstinspires.ftc.teamcode;
 
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.utils.TargetInfo;
 import java.util.List;
 
-public class RobotVision implements Mechanism {
+public class RobotVision {
     
     public final static String TARGET_LORRY = "Lorry";
     public final static String TARGET_LORRIES = "Lorries";
@@ -30,7 +30,7 @@ public class RobotVision implements Mechanism {
     
     public RobotVision(){}
     
-    public void initializeHardware(HardwareMap hardwareMap){
+    public void initializeVision(HardwareMap hardwareMap){
         initVuforia(hardwareMap);
         initTfod(hardwareMap);
         if(tfod != null){
