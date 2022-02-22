@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.utils.FPSCounter;
 
 @TeleOp(name="Teleoperado Hardlus Freight Frenzy")
-public class Teleoperado extends OpMode{
+public class Teleoperado extends OpMode {
     private Hardbot robot;
     private FPSCounter fps;
     private double lastChange;
@@ -35,19 +36,14 @@ public class Teleoperado extends OpMode{
     
     @Override
     public void loop(){
-        double drive = -gamepad1.left_stick_y;
-        double lateral = gamepad1.right_stick_x;
-        double turn = gamepad1.left_stick_x;
-        double powerMultiplier = getPowerMultiplier();
-
-        robot.move(drive, lateral, turn, powerMultiplier);
-        controlIntake();
-        controlElevator();
+        moveChasis(gamepad1);
+        controlIntake(gamepad2);
+        controlElevator(gamepad2);
         if (lastChange + 30 < runtime.milliseconds()){
-            controlElevatorServo();
+            controlElevatorServo(gamepad2);
             lastChange = runtime.milliseconds();
         }
-        controlCarousel();
+        controlCarousel(gamepad2);
         telemetry.addData("FPS", fps.getUpdatedFPS());
         telemetry.update();
     }
@@ -55,36 +51,42 @@ public class Teleoperado extends OpMode{
     @Override
     public void stop(){}
 
-    private double getPowerMultiplier(){
-        if(gamepad1.right_bumper && gamepad1.left_bumper)
+    private void moveChasis(Gamepad gamepad) {
+        double drive = -gamepad.left_stick_y;
+        double lateral = gamepad.right_stick_x;
+        double turn = gamepad.left_stick_x;
+        double powerMultiplier = getPowerMultiplier(gamepad);
+        robot.move(drive, lateral, turn, powerMultiplier);
+    }
+
+    private double getPowerMultiplier(Gamepad gamepad){
+        if(gamepad.right_bumper && gamepad.left_bumper)
             return 0.2;
-        if(gamepad1.right_bumper)
+        if(gamepad.right_bumper)
             return 0.6;
-        if(gamepad1.left_bumper)
+        if(gamepad.left_bumper)
             return 0.4;
         else
             return 0.8;
     }
     
-    private void controlCarousel(){
+    private void controlCarousel(Gamepad gamepad){
         double carouselPower = 0;
-        if (gamepad2.right_stick_y < 0) {
+        if (gamepad.right_stick_y < 0) {
             carouselPower = -1;
-        }
-        else if (gamepad2.right_stick_y > 0) {
+        } else if (gamepad.right_stick_y > 0) {
             carouselPower = 1;
-        }
-        else {
+        } else {
             carouselPower = 0;
         }
         robot.carouselServomotor.setPower(carouselPower);
     }
     
-    private void controlElevator(){
+    private void controlElevator(Gamepad gamepad){
         double elevatorPower = 0;
-        if(gamepad2.right_trigger > 0.00001){
+        if(gamepad.right_trigger > 0){
             elevatorPower = Hardbot.ELEVATOR_POWER;
-        } else if (gamepad2.left_trigger > 0.00001){
+        } else if (gamepad.left_trigger > 0){
             elevatorPower = -Hardbot.ELEVATOR_POWER;
         } else {
             elevatorPower = 0.0;
@@ -92,23 +94,22 @@ public class Teleoperado extends OpMode{
         robot.motorElevator.setPower(elevatorPower);
     }
     
-    private void controlElevatorServo(){
+    private void controlElevatorServo(Gamepad gamepad){
         double servoElevatorPower = 0;
-        if (gamepad2.left_stick_x > 0) {
+        if (gamepad.left_stick_x > 0) {
             servoElevatorPower = 1;
-        } else if (gamepad2.left_stick_x < 0) {
+        } else if (gamepad.left_stick_x < 0) {
             servoElevatorPower = -1;
-        }
-        else{
+        } else {
            servoElevatorPower = 0; 
         }
     }
     
-    private void controlIntake(){
+    private void controlIntake(Gamepad gamepad){
         double intakePower = 0;
-        if(gamepad2.a){
+        if(gamepad.a){
             intakePower = -Hardbot.INTAKE_POWER;
-        } else if (gamepad2.b){
+        } else if (gamepad.b){
             intakePower = Hardbot.INTAKE_POWER;
         }
         robot.motorIntake.setPower(intakePower);
