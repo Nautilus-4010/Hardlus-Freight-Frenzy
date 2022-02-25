@@ -39,8 +39,6 @@ public class Hardbot {
     private BNO055IMU imu;
     private Orientation angles;
     private Acceleration gravity;
-    
-    private RevColorSensorV3 distanceSensor;
 
     public CRServo carouselServomotor;
 
@@ -67,7 +65,6 @@ public class Hardbot {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         imu = hardwareMap.get(BNO055IMU.class, "imu2");
         initIMU();
-        distanceSensor = hardwareMap.get(RevColorSensorV3.class, "distance_sensor");
         motorElevator = hardwareMap.get(DcMotor.class, "elevatorMotor");
         motorElevator.setDirection(DcMotorSimple.Direction.FORWARD);
         servoElevator = hardwareMap.get(CRServo.class, "elevatorServomotor");
