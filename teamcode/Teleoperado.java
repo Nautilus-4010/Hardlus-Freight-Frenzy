@@ -39,10 +39,7 @@ public class Teleoperado extends OpMode {
         moveChasis(gamepad1);
         controlIntake(gamepad2);
         controlElevator(gamepad2);
-        if (lastChange + 30 < runtime.milliseconds()){
-            controlElevatorServo(gamepad2);
-            lastChange = runtime.milliseconds();
-        }
+        controlElevatorServo(gamepad2);
         controlCarousel(gamepad2);
         telemetry.addData("FPS", fps.getUpdatedFPS());
         telemetry.update();
@@ -83,15 +80,13 @@ public class Teleoperado extends OpMode {
     }
     
     private void controlElevator(Gamepad gamepad){
-        double elevatorPower = 0;
         if(gamepad.right_trigger > 0){
-            elevatorPower = Hardbot.ELEVATOR_POWER;
+            robot.bajarElevador();
         } else if (gamepad.left_trigger > 0){
-            elevatorPower = -Hardbot.ELEVATOR_POWER;
+            robot.subirElevador();
         } else {
-            elevatorPower = 0.0;
+            robot.motorElevator.setPower(0);
         }
-        robot.motorElevator.setPower(elevatorPower);
     }
     
     private void controlElevatorServo(Gamepad gamepad){
@@ -103,6 +98,7 @@ public class Teleoperado extends OpMode {
         } else {
            servoElevatorPower = 0; 
         }
+        robot.servoElevator.setPower(servoElevatorPower);
     }
     
     private void controlIntake(Gamepad gamepad){
