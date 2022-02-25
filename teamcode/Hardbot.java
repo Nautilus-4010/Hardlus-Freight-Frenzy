@@ -32,7 +32,7 @@ public class Hardbot {
     public long NIVEL_UNO = 400L;
     public long NIVEL_DOS = 800L;
     public long NIVEL_TRES = 1200L;
-    public static final double ELEVATOR_POWER = 0.0001;
+    public static final double ELEVATOR_POWER = 0.3;
     private final double INCREMENTO = 0.06;
     private final double LIMITE = 20; // En cm
 
@@ -185,6 +185,14 @@ public class Hardbot {
             String.format("BR: %.2f", backRight.getPower())
         };
         return powers;
+    }
+    
+    public void bajarElevador() {
+        this.motorElevator.setPower(-ELEVATOR_POWER);
+    }
+    
+    public void subirElevador() {
+        this.motorElevator.setPower(ELEVATOR_POWER);
     }
 
     public void setElevatorLevel(int nivel){
