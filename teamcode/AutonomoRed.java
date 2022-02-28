@@ -22,7 +22,7 @@ public class AutonomoRed extends LinearOpMode {
         robot.moveForward(5);
         robot.turnRight(82);
         robot.lateralMove(10);
-        robot.lateralMove(4);
+        robot.lateralMove(6);
         robot.moveForward(45);
         robot.moveForward(30);
     }

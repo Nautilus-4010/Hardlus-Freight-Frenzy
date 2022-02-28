@@ -19,7 +19,7 @@ public class AutonomoRed2 extends LinearOpMode {
         robot.initializeHardware();
         telemetry.update();
         waitForStart();
-        robot.moveForward(5);
+        /*robot.moveForward(5);
         robot.turnLeft(85);
         robot.moveForward(42);
         robot.lateralMove(-7);
@@ -27,6 +27,13 @@ public class AutonomoRed2 extends LinearOpMode {
         sleep(2500);
         robot.carouselMove(0.0);
         robot.lateralMove(50);
-        robot.moveForward(3);
+        robot.moveForward(3); */
+        robot.lateralMove(3);
+        robot.moveForward(28);
+        robot.carouselMove(-1.0);
+        sleep(3000);
+        robot.carouselMove(0.0);
+        robot.lateralMove(53);
+        robot.moveForward(13);
     }
 }
