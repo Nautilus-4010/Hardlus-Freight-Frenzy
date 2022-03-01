@@ -90,15 +90,11 @@ public class Teleoperado extends OpMode {
     }
     
     private void controlElevatorServo(Gamepad gamepad){
-        double servoElevatorPower = 0;
-        if (gamepad.left_stick_x > 0) {
-            servoElevatorPower = 1;
-        } else if (gamepad.left_stick_x < 0) {
-            servoElevatorPower = -1;
-        } else {
-           servoElevatorPower = 0; 
-        }
-        robot.servoElevator.setPower(servoElevatorPower);
+        double servoElevatorPower = Math.max(0, gamepad.left_stick_x) * Hardbot.ELEVATOR_SERVO_LOW;
+        servoElevatorPower = Hardbot.ELEVATOR_SERVO_LOW - servoElevatorPower;
+        if(gamepad.dpad_right)
+            servoElevatorPower = Hardbot.ELEVATOR_SERVO_MID;
+        robot.servoElevator.setPosition(servoElevatorPower);
     }
     
     private void controlIntake(Gamepad gamepad){

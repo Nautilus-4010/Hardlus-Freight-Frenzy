@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
@@ -28,19 +29,20 @@ public class Hardbot {
     public DcMotor backRight;
 
     public DcMotor motorElevator;
-    public CRServo servoElevator;
+    public Servo servoElevator;
     public long NIVEL_UNO = 400L;
     public long NIVEL_DOS = 800L;
     public long NIVEL_TRES = 1200L;
     public static final double ELEVATOR_POWER = 0.3;
     private final double INCREMENTO = 0.06;
     private final double LIMITE = 20; // En cm
+    public static final double ELEVATOR_SERVO_TOP = 0;
+    public static final double ELEVATOR_SERVO_MID = 0.67;
+    public static final double ELEVATOR_SERVO_LOW = 0.7;
 
     private BNO055IMU imu;
     private Orientation angles;
     private Acceleration gravity;
-    
-    private RevColorSensorV3 distanceSensor;
 
     public CRServo carouselServomotor;
 
@@ -67,12 +69,12 @@ public class Hardbot {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         imu = hardwareMap.get(BNO055IMU.class, "imu2");
         initIMU();
-        distanceSensor = hardwareMap.get(RevColorSensorV3.class, "distance_sensor");
         motorElevator = hardwareMap.get(DcMotor.class, "elevatorMotor");
         motorElevator.setDirection(DcMotorSimple.Direction.FORWARD);
-        servoElevator = hardwareMap.get(CRServo.class, "elevatorServomotor");
+        servoElevator = hardwareMap.get(Servo.class, "elevatorServomotor");
         motorIntake = hardwareMap.get(DcMotor.class, "intakeMotor");
         motorIntake.setDirection(DcMotorSimple.Direction.REVERSE);
+        servoElevator.setPosition(ELEVATOR_SERVO_LOW);
     }
 
     public void carouselMove(double lap) {

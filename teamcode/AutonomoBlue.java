@@ -18,9 +18,9 @@ public class AutonomoBlue extends LinearOpMode{
         telemetry.update();
         waitForStart();
         robot.moveForward(5);
-        robot.turnRight(82);
+        robot.turnLeft(82);
         robot.lateralMove(-10);
-        robot.lateralMove(-4);
+        robot.lateralMove(-6);
         robot.moveForward(45);
         robot.moveForward(30);
     }
